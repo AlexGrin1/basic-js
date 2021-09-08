@@ -5,24 +5,31 @@ import { NotImplementedError } from '../extensions/index.js';
  * 
  */
 export default {
-  getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  constructor(n){
+    this.maker=[]
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  getLength() {return this.maker.length;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  addLink(value) {
+    this.maker.push(`(${value})`);
+		return chainMaker
+  },
+  removeLink(value) {
+    if(typeof value !=="number" ||!Number.isInteger(value) || value===undefined){
+throw new Error ("You can't remove incorrect link!")
+}
+		else{
+			this.maker.splice(value-1,1);
+		return chainMaker	
+		}
   },
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    this.maker.reverse();
+		return chainMaker
   },
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
-};
+    let result=[...this.maker]
+		this.maker.length=0
+		return result.join('~~')}
+}
+
