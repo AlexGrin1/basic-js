@@ -25,7 +25,7 @@ export default class DepthCalculator {
     }
     let arr1 = arr.map((el) => {
       if (Array.isArray(el)) {
-        DepthCalculator.calculateDepth(el);
+        this.calculateDepth(el);
       }
     });
     return this.count;
