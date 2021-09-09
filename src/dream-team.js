@@ -19,13 +19,16 @@ export default function createDreamTeam(arr) {
   }
   const firstLetterName = arr.map((el) => {
     if (typeof el === "string") {
-      return el[0].toUpperCase();
+      if (el[0] !== " ") {
+        return el[0].toUpperCase();
+      } else {
+        let i = el.split("").find((e) => e != " ");
+        return i;
+      }
     }
   });
   if (!firstLetterName.join("")) {
     return false;
   }
   return firstLetterName.sort().join("").toUpperCase().replace(" ", "");
-  throw new NotImplementedError("Not implemented");
-  // remove line with error and write your code here
 }

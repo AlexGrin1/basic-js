@@ -12,7 +12,7 @@ import { NotImplementedError } from "../extensions/index.js";
  *
  */
 export default function getSeason(data) {
-  const curentMonth = data.getMonth() - 1;
+  const curentMonth = data.getMonth();
   const allMonth = [
     "winter",
     "winter",
@@ -30,10 +30,9 @@ export default function getSeason(data) {
   if (data == undefined) {
     return "Invalid date!";
   }
-  // if(curentMonth<0||curentMonth>11) {throw 'Error Invalid date!'}
-  else {
+  if (curentMonth < 0 || curentMonth > 11) {
+    throw new Error("Invalid date!");
+  } else {
     return allMonth[curentMonth];
   }
-  throw new NotImplementedError("Not implemented");
-  // remove line with error and write your code here
 }
