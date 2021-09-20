@@ -11,28 +11,32 @@ const chainMaker = {
     return this.maker.length;
   },
   addLink(value) {
-    this.maker.push(`(${value})`);
+    this.maker.push(`( ${value} )`);
     return this;
   },
   removeLink(value) {
-    if (
-      typeof value !== "number" ||
-      !Number.isInteger(value) ||
-      value === undefined
-    ) {
-      throw new Error("You can't remove incorrect link!");
-    } else {
+    if (typeof value === "number" && value > 0 && value <= this.maker.length) {
       this.maker.splice(value - 1, 1);
-      return this;
+    } else {
+      this.maker = [];
+      throw new Error("You can't remove incorrect link!");
     }
+    return this;
+    // if (typeof value !== "number" && value <= 0 && value > this.maker.length) {
+    //   this.maker = [];
+    //   throw new Error("You can't remove incorrect link!");
+    // } else {
+    //   this.maker.splice(value - 1, 1);
+    // }
+    // return this;
   },
   reverseChain() {
     this.maker.reverse();
-    return chainMaker;
+    return this;
   },
   finishChain() {
     let result = [...this.maker];
-    this.maker.length = 0;
+    this.maker.length = [];
     return result.join("~~");
   },
 };

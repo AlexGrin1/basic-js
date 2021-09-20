@@ -11,8 +11,15 @@ import { NotImplementedError } from "../extensions/index.js";
  * getSeason(new Date(2020, 02, 31)) => 'spring'
  *
  */
-export default function getSeason(data) {
-  const curentMonth = data.getMonth();
+export default function getSeason(date) {
+  if (!date) {
+    return "Unable to determine the time of year!";
+  }
+  if (!(date + "").includes("GMT")) {
+    throw new Error("Invalid date!");
+  }
+  if (date + "" == new Date()) throw new Error("Invalid date!");
+  const curentMonth = date.getMonth();
   const allMonth = [
     "winter",
     "winter",
@@ -27,12 +34,5 @@ export default function getSeason(data) {
     "autumn",
     "winter",
   ];
-  if (data == undefined) {
-    return "Invalid date!";
-  }
-  if (curentMonth < 0 || curentMonth > 11) {
-    throw new Error("Invalid date!");
-  } else {
-    return allMonth[curentMonth];
-  }
+  return allMonth[curentMonth];
 }
