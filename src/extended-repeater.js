@@ -16,13 +16,11 @@ import { NotImplementedError } from "../extensions/index.js";
  *
  */
 export default function repeater(str, { ...options }) {
-  let addArr = [];
-  for (let i = 0; i < options.additionRepeatTimes; i++) {
-    addArr.push(options.addition);
-  }
-  let res = [];
-  for (let i = 0; i < options.repeatTimes; i++) {
-    res.push(`${str}${addArr.join(`${options.additionSeparator}`)}`);
-  }
-  return res.join(`${options.separator}`);
+  let addition = options.addition ? options.addition : "";
+  let additSeparator = options.additionSeparator ? options.additionSeparator : "|";
+  let additTime = options.additionRepeatTimes ? options.additionRepeatTimes : 1;
+  let conditionOne = (String(addition) + String(additSeparator)).repeat(additTime - 1) + String(addition);
+  let separator = options.separator ? options.separator : "+";
+  let time = options.repeatTimes ? options.repeatTimes : "1";
+  return (String(str) + conditionOne + String(separator)).repeat(time - 1) + String(str) + conditionOne;
 }
